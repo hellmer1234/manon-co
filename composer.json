@@ -1,8 +1,6 @@
 {
-    "name": "vendor/package", "description": "MET02 - Boutique en ligne", "license": "GPL3.0+",
+    "name": "vendor/package", "description": "Manon&Co - Boutique en ligne", "license": "GPL3.0+",
     "authors": [
-        { "name": "Eloise Faust",
-            "email": "eloise.faust@gmail.com" },
         { "name": "Louis-Marie Richard",
             "email": "hellmer@gmail.com" }],
     "require" : {
