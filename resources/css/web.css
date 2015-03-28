@@ -1,0 +1,121 @@
+h1
+{
+    text-align: center;
+}
+
+ul li {
+	list-style-type: none;
+}
+
+#erreur_catch
+{
+    display: none;
+
+}
+
+.alert-danger, .alert-error {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+}
+
+.alert-danger,
+.alert-error,
+.alert-danger .alert-heading,
+.alert-error .alert-heading {
+    color: #b94a48;
+}
+
+table {
+	width: 100%;
+}
+
+th, td {
+	border-top: 1px solid black;
+}
+
+.tabdetails{
+	margin-top: 25px;
+}
+
+#catalogue .catalogue-filters{
+	margin-bottom: 10px;
+}
+
+#catalogue .catalogue-item,
+#panier .panier-item{
+	border-top: 1px solid black;
+}
+
+#catalogue .catalogue-item .item-titre,
+#panier .panier-item .item-titre{
+	font-size: 1.2em;
+	margin-bottom: 20px;
+	padding: 10px;
+}
+
+#catalogue .catalogue-item .item-prix{
+	text-align: center;
+	font-weight: bold;
+}
+
+.form-control{
+	width: auto;
+}
+
+.avis {
+	margin-top: 5px;
+}
+
+.infosAvis {
+	margin-bottom: 20px;
+}
+
+#listeCommandes > div,
+#listeAdresses > div{
+	border-top: 1px solid black;
+	margin-bottom: 10px;
+}
+
+.input-number-panier
+{
+width : 50px;
+}
+
+.blocknews{
+	padding: 5px;
+	background-color:rgb(237,245,248);
+	border-top: 1px groove;
+	border-width: 2px;
+	border-color:black;
+}
+.titrenews{
+	font-size: 25px;
+	color:rgb(114,174,202);
+	padding-left:10px;
+}
+
+.blockconnexion{
+	padding: 5px;
+}
+
+.blockcategorie{
+	padding: 3px; 
+	background-color:rgb(237,245,248);
+}
+
+.listecategorie{
+	list-style-type:none;
+	padding: 10px;
+}
+
+.listepromotions{
+	list-style-type:none;
+}
+
+.listenouveautes{
+	list-style-type:none;
+}
+
+.blockinfocompte{
+	background-color:rgb(215,215,215);
+}

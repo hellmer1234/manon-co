@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<database name="lempiredesvis" defaultIdMethod="native">
+
+	<table name="client" description="Table des clients">
+		<column name="idclient" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" description="Identifiant du client"/>
+		<column name="login" required="true" type="VARCHAR" size="55" description="Login du client = adresse mail" />
+		<column name="mdp"  required="true" type="VARCHAR" size="24" description="Mot de passe du client" />
+		<column name="nom" required="true" type="VARCHAR" size="24" description="Nom du client" />
+		<column name="prenom" required="true" type="VARCHAR" size="24" description="Prenom du client" />
+		<column name="numtelephone" required="false" type="VARCHAR" size="10" description="Telephone du client" />
+	</table>
+
+	<table name="adresse" description="Table des adresses">
+		<column name="idadresse" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" description="Numero de l'adresse"/>
+		<column name="numerorue" required="false" type="INTEGER" description="Numero de la rue" />
+		<column name="rue"  required="true" type="VARCHAR" size="255" description="Rue" />
+		<column name="etage" required="false" type="INTEGER" description="Numero de l'etage" />
+		<column name="codepostal" required="true" type="INTEGER" description="Code postal" />
+		<column name="ville" required="true" type="VARCHAR" size="55" description="Ville" />
+		<column name="typeAdresse" required="true" type="VARCHAR" size="24" description="Type de l'adresse : Facturation/Livraison" />
+		<column name="idclient" required="true" type="INTEGER" description="Numero du client lie à l'adresse" />
+		<foreign-key foreignTable="client">
+		  <reference local="idclient" foreign="idclient" />
+		</foreign-key>
+	</table>
+
+	<table name="commande" description="Table de commandes">
+		<column name="idcommande" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" description="Numero de la commande"/>
+		<column name="etatcommande"  required="true" type="VARCHAR" size="24" description="Etat de la commande : En preparation/En cours de livraison/Livree" />
+		<column name="idclient"  required="true" type="INTEGER" description="Id du client lié à la commande" />
+		<foreign-key foreignTable="client">
+		  <reference local="idclient" foreign="idclient" />
+		</foreign-key>
+	</table>
+
+	<table name="tauxtva" description="Table des taux de TVA">
+		<column name="idtaux" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" description="Numero du taux"/>
+		<column name="libelletaux" required="false" type="VARCHAR" size="255" description="Libelle du taux de TVA" />
+		<column name="tauxtva"  required="true" type="DOUBLE" description="Taux de la TVA" />
+	</table>
+
+	<table name="article" description="Table des articles">
+		<column name="idarticle" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" description="Article"/>
+		<column name="referencearticle" required="true" type="VARCHAR" size="55" description="Reference de l'article" />
+		<column name="libellearticle"  required="true" type="VARCHAR" size="255" description="Libelle de l'article" />
+		<column name="descriptionarticle" required="false" type="VARCHAR" size="2024" description="Description article" />
+		<column name="prixht" required="true" type="DOUBLE" description="Prix HT de l'article" />
+		<column name="qqtestock" required="true" type="INTEGER" description="Quantite en stock" />
+		<column name="dateajout" required="true" type="DATE" description="Date de creation de l'article" />
+		<column name="idtaux" required="true" type="DOUBLE" description="Taux de TVA de l'article" />
+		<foreign-key foreignTable="tauxtva">
+		  <reference local="idtaux" foreign="idtaux" />
+		</foreign-key>
+	</table>
+
+	<table name="avis" description="Avis des internautes sur un produit">
+		<column name="idavis" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" description="Avis"/>
+		<column name="redacteur" required="true" type="VARCHAR" size="55" description="Redacteur de l'article" />
+		<column name="note"  required="true" type="DOUBLE" description="Note donne a l'article" />
+		<column name="descriptionavis" required="false" type="VARCHAR" size="2024" description="Description article" />
+		<column name="idarticle" required="true" type="INTEGER" description="Article lie a l'avis" />
+		<foreign-key foreignTable="article">
+		  <reference local="idarticle" foreign="idarticle" />
+		</foreign-key>
+	</table>
+
+	<table name="promotion" description="Table des promotions">
+		<column name="idpromo" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" description="Numero de la promotion"/>
+		<column name="titrepromo" required="true" type="VARCHAR" size="255" description="Titre de la promotion" />
+		<column name="datedebut"  required="true" type="DATE" description="Date de debut de la promotion" />
+		<column name="datefin" required="true" type="DATE" description="Date de fin de promotion" />
+
+	</table>
+
+	<table name="applicationpromotion" description="Liste des articles par promotion">
+		<column name="idpromo" required="true" primaryKey="true" type="INTEGER" description="Numero de la promotion"/>
+		<column name="idarticle" required="true" primaryKey="true" type="INTEGER" description="Article"/>
+		<column name="qqtearticlepromo"  required="false" type="INTEGER" description="Quantite d'articles en promotion" />
+		<column name="prixpromo" required="true" type="DOUBLE" description="Prix de l'article en promotion" />
+		<foreign-key foreignTable="promotion">
+		  <reference local="idpromo" foreign="idpromo" />
+		</foreign-key>
+		<foreign-key foreignTable="article">
+		  <reference local="idarticle" foreign="idarticle" />
+		</foreign-key>
+	</table>
+
+	<table name="categorie" description="Liste des categories">
+		<column name="idcategorie" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" description="Numero de la categorie"/>
+		<column name="libellecategorie" required="true" type="VARCHAR" size="255" description="Libelle de la categorie" />
+	</table>
+
+	<table name="catalogue" description="Catalogue des articles par categorie">
+		<column name="idarticle" required="true" primaryKey="true" type="INTEGER" description="Numero de l'article"/>
+		<column name="idcategorie" required="true" primaryKey="true" type="INTEGER" description="Numero de la categorie"/>
+		<foreign-key foreignTable="categorie">
+		  <reference local="idcategorie" foreign="idcategorie" />
+		</foreign-key>
+		<foreign-key foreignTable="article">
+		  <reference local="idarticle" foreign="idarticle" />
+		</foreign-key>
+	</table>
+
+	<table name="panier" description="Panier d'articles generant une commande">
+		<column name="idarticle" required="true" primaryKey="true" type="INTEGER" description="Numero de l'article"/>
+		<column name="idcommande" required="true" primaryKey="true" type="INTEGER" description="Numero de la commande"/>
+		<column name="quantite" required="true" type="INTEGER" description="Quantite du produit selectionne" />
+		<foreign-key foreignTable="article">
+		  <reference local="idarticle" foreign="idarticle" />
+		</foreign-key>
+		<foreign-key foreignTable="commande">
+		  <reference local="idcommande" foreign="idcommande" />
+		</foreign-key>
+	</table>
+
+</database>
